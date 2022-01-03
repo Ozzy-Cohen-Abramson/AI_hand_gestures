@@ -4,6 +4,8 @@ import HandTrackingModule as htm
 import time
 import autopy
 
+
+
 # variables
 wCam, hCam = 640, 480
 frameR = 100  # frame reduction
@@ -64,8 +66,19 @@ while True:
             # 10. Click mouse id distance is short
             if length < 37:
                 cv2.circle(img, (lineInfo[4], lineInfo[5]), 15, (0, 255, 0), cv2.FILLED)
+
                 autopy.mouse.click()
 
+
+        if fingers[1] == 1 and fingers[2] == 1 and fingers[3] == 1 and fingers[4] == 0:
+            # 9. find distance between fingers
+            length, img, lineInfo = detector.findDistance(12, 16, img)
+
+            # 10. Click mouse id distance is short
+            if length < 37:
+                cv2.circle(img, (lineInfo[4], lineInfo[5]), 15, (0, 255, 0), cv2.FILLED)
+                right_button = autopy.mouse.Button.RIGHT
+                autopy.mouse.click(right_button)
 
 
     # 11. Frame rate
