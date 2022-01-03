@@ -80,6 +80,16 @@ while True:
                 right_button = autopy.mouse.Button.RIGHT
                 autopy.mouse.click(right_button)
 
+        if fingers[1] == 0 and fingers[2] == 0 and fingers[3] == 1 and fingers[4] == 1:
+            # 9. find distance between fingers
+            length, img, lineInfo = detector.findDistance(16, 20, img)
+
+            # 10. Click mouse id distance is short
+            if length < 37:
+                cv2.circle(img, (lineInfo[4], lineInfo[5]), 15, (0, 255, 0), cv2.FILLED)
+                middle_button = autopy.mouse.Button.MIDDLE
+                autopy.mouse.click(middle_button)
+
 
     # 11. Frame rate
     cTime = time.time()
